@@ -58,6 +58,23 @@ angular.module('ToDoApp', ['ui.bootstrap'])
             }).error(function(err) {
                 $scope.errorMessage = err;
             });
-        }
+        };
+
+        $scope.incrementVotes = function(task, amount) {
+            $scope.updating = true;
+            $http.put(tasksUrl + '/' + task.objectId, {
+                votes: {
+                    __op: 'Increment',
+                    amount: amount
+                }
+            }).success(function(responseData) {
+                    task.votes = responseData.votes;
+            }).error(function(err) {
+                console.log(err);
+            }).finally(function() {
+                $scope.updating = false;
+            });
+
+        };
 
     });

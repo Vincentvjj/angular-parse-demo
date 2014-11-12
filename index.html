@@ -59,6 +59,7 @@
                         <tr>
                             <th>Task</th>
                             <th>Priority</th>
+                            <th>Votes</th>
                             <th>Done</th>
 
                         </tr>
@@ -69,6 +70,11 @@
                             <td>
                                 <rating max="3" ng-change="updateTask(task)" ng-model="task.priority" ng-class="{done: task.done}"
                                         readonly="task.done"></rating>
+                            </td>
+                            <td>
+                                {{task.votes || 0}}
+                                <span class="glyphicon glyphicon-thumbs-up" ng-click="incrementVotes(task, 1)"></span>
+                                <span class="glyphicon glyphicon-thumbs-down" ng-click="incrementVotes(task, -1)"></span>
                             </td>
                             <td><input type="checkbox" ng-model="task.done" ng-change="updateTask(task)"/></td>
                         </tr>
